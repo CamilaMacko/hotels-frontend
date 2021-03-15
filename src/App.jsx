@@ -7,8 +7,10 @@ import { bedroomFilter } from "./resources/bedroomFilter";
 import { initialStates } from "./resources/initialStates";
 import { months } from "./resources/months";
 
-import HotelInfo from "./HotelInfo";
+import Header from "./Header";
 import Filter from "./Filter";
+import HotelInfo from "./HotelInfo";
+import Error from "./Error";
 
 export default function App() {
   const [deleteResult, setDeleteResult] = useState(false);
@@ -145,55 +147,35 @@ export default function App() {
 
   return (
     <div className="App">
-      <div className="header-container">
-        <h1>Hoteles.</h1>
-        <div className="result">
-          {deleteResult && <span>Resultado de búsqueda de hoteles, </span>}
-          {dateFromINPUT !== initialStates[0].value ? (
-            <span>
-              desde el <span>{dateFromText} </span>
-            </span>
-          ) : null}
-          {dateToINPUT !== initialStates[0].value ? (
-            <span>
-              hasta el <span>{dateToText} </span>
-            </span>
-          ) : null}
-          {country !== initialStates[1].value ? (
-            <span>
-              en <span>{country} </span>
-            </span>
-          ) : null}
-          {price !== initialStates[2].value ? (
-            <span>
-              en un hotel <span>{price} </span>
-            </span>
-          ) : null}
-          {bedroom !== initialStates[3].value ? (
-            <span>
-              con capacidad <span>{bedroom} </span>
-            </span>
-          ) : null}
-        </div>
-      </div>
+      <Header
+        key="header"
+        result={deleteResult}
+        dateFrom={dateFromINPUT}
+        dateFromText={dateFromText}
+        dateTo={dateToINPUT}
+        dateToText={dateToText}
+        country={country}
+        price={price}
+        bedroom={bedroom}
+      />
 
       <div className="filter-container display-flex">
         <input onChange={getDateFrom} value={dateFromINPUT} type="date" />
         <input onChange={getDateTo} value={dateToINPUT} type="date" />
         <Filter
-          key="country"
+          id="country"
           change={changeCountry}
           value={country}
           infoOption={countryFilter}
         />
         <Filter
-          key="price"
+          id="price"
           change={changePrice}
           value={price}
           infoOption={priceFilter}
         />
         <Filter
-          key="bedroom"
+          id="bedroom"
           change={changeBedroom}
           value={bedroom}
           infoOption={bedroomFilter}
@@ -201,22 +183,13 @@ export default function App() {
         <button onClick={deleteFilter}>Eliminar busqueda</button>
       </div>
 
-      <div className="cc">
-        <p>rf</p>
-        <p>rf</p>
-        <p>rf</p>
-        <p>rf</p>
-        <p>rf</p>
-        <p>rf</p>
-        <p>d</p>
-      </div>
-
-      {/* <div className="display-flex-wrap">
+      <div className="display-flex-wrap">
         {filteredList.length !== 0 ? (
           filteredList.map((hotel, index) => {
             return (
               <HotelInfo
-                id={index}
+                key={index}
+                slug={hotel.slug}
                 name={hotel.name}
                 photo={hotel.photo}
                 description={hotel.description}
@@ -228,9 +201,12 @@ export default function App() {
             );
           })
         ) : (
-          <p>Ups, no se han encontrado resultados.</p>
+          <Error
+            className="error-container display-flex"
+            text="Ups, no se han encontrado resultados."
+          />
         )}
-      </div> */}
+      </div>
     </div>
   );
 }
