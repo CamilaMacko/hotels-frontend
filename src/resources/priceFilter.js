@@ -6,22 +6,22 @@ export const priceFilter = [
   },
   {
     id: 2,
-    value: "1",
+    value: "muy económico",
     text: "$"
   },
   {
     id: 3,
-    value: "2",
+    value: "económico",
     text: "$$"
   },
   {
     id: 4,
-    value: "3",
+    value: "caro",
     text: "$$$"
   },
   {
     id: 5,
-    value: "4",
+    value: "muy caro",
     text: "$$$$"
   }
 ];

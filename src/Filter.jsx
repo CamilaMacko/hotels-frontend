@@ -9,8 +9,12 @@ export default function Filter(props) {
   ));
 
   return (
-    <div className="filter-container">
-      <select onChange={props.change} value={props.value}>
+    <div>
+      <select
+        className="filter-select"
+        onChange={props.change}
+        value={props.value}
+      >
         {elementList}
       </select>
     </div>
