@@ -7,17 +7,9 @@ import dollarGrey from "./resources/svg/dollar-grey.svg";
 
 export default function HotelInfo(props) {
   return (
-    <div key={props.id} className="card-container">
+    <div className="card-container">
       <div className="image-card-container">
         <img className="image-card" src={props.photo} alt={props.slug} />
-        <div className="image-circle"></div>
-        <div className="img-favorite">
-          <div className="like-container">
-            {/* <Like /> */}
-            {/* <img className="like" src={like} alt="like" />
-            <img className="like-red" src={likeRed} alt="like-red" /> */}
-          </div>
-        </div>
       </div>
       <div className="info-card">
         <h1 className="name-hotel">{props.name}</h1>

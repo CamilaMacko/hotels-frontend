@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 export default function Filter(props) {
   const dataList = props.infoOption;
@@ -9,8 +9,12 @@ export default function Filter(props) {
   ));
 
   return (
-    <div className="filter-container">
-      <select onChange={props.change} value={props.value}>
+    <div key={props.id}>
+      <select
+        className="filter-select"
+        onChange={props.change}
+        value={props.value}
+      >
         {elementList}
       </select>
     </div>
