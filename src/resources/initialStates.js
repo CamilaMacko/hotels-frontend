@@ -6,16 +6,16 @@ export const initialStates = [
   {
     id: 3,
     value: "allCountries",
-    text: "Todos los paises"
+    label: "Todos los paises"
   },
   {
     id: 4,
     value: "allPrices",
-    text: "Todos los precios"
+    label: "Todos los precios"
   },
   {
     id: 5,
     value: "allBedrooms",
-    text: "Todos los tamaños"
+    label: "Todos los tamaños"
   }
 ];

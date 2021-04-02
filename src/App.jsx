@@ -6,8 +6,10 @@ import { priceFilter } from "./resources/priceFilter";
 import { bedroomFilter } from "./resources/bedroomFilter";
 import { initialStates } from "./resources/initialStates";
 import { months } from "./resources/months";
+import plane from "./resources/svg/plane.svg";
+import deleteIcon from "./resources/svg/delete.svg";
 
-import Header from "./Header";
+import Results from "./Results";
 import Filter from "./Filter";
 import HotelInfo from "./HotelInfo";
 import Error from "./Error";
@@ -147,65 +149,77 @@ export default function App() {
 
   return (
     <div className="App">
-      <Header
-        key="header"
-        result={deleteResult}
-        dateFrom={dateFromINPUT}
-        dateFromText={dateFromText}
-        dateTo={dateToINPUT}
-        dateToText={dateToText}
-        country={country}
-        price={price}
-        bedroom={bedroom}
-      />
-
-      <div className="filter-container display-flex">
-        <input onChange={getDateFrom} value={dateFromINPUT} type="date" />
-        <input onChange={getDateTo} value={dateToINPUT} type="date" />
-        <Filter
-          id="country"
-          change={changeCountry}
-          value={country}
-          infoOption={countryFilter}
-        />
-        <Filter
-          id="price"
-          change={changePrice}
-          value={price}
-          infoOption={priceFilter}
-        />
-        <Filter
-          id="bedroom"
-          change={changeBedroom}
-          value={bedroom}
-          infoOption={bedroomFilter}
-        />
-        <button onClick={deleteFilter}>Eliminar busqueda</button>
+      <div className="header">
+        <h1>Hoteles</h1>
+        <img width="70px" src={plane} alt="plane" />
       </div>
+      <div className="display">
+        <div>
+          <div className="filters-container">
+            <input onChange={getDateFrom} value={dateFromINPUT} type="date" />
+            <input onChange={getDateTo} value={dateToINPUT} type="date" />
+            <Filter
+              id="price"
+              change={changeCountry}
+              value={country}
+              infoOption={countryFilter}
+            />
+            <Filter
+              id="price"
+              change={changePrice}
+              value={price}
+              infoOption={priceFilter}
+            />
+            <Filter
+              id="bedroom"
+              change={changeBedroom}
+              value={bedroom}
+              infoOption={bedroomFilter}
+            />
+            <button onClick={deleteFilter}>
+              <img width="16px" src={deleteIcon} alt="delete-icon" />
+              Eliminar Búsqueda
+            </button>
+          </div>
+        </div>
 
-      <div className="display-flex-wrap">
-        {filteredList.length !== 0 ? (
-          filteredList.map((hotel, index) => {
-            return (
-              <HotelInfo
-                key={index}
-                slug={hotel.slug}
-                name={hotel.name}
-                photo={hotel.photo}
-                description={hotel.description}
-                rooms={hotel.rooms}
-                city={hotel.city}
-                country={hotel.country}
-                price={hotel.price}
-              />
-            );
-          })
-        ) : (
-          <Error
-            className="error-container display-flex"
-            text="Ups, no se han encontrado resultados."
-          />
-        )}
+        <div className="results-container">
+          <div className="text-result">
+            <Results
+              key="header"
+              result={deleteResult}
+              dateFrom={dateFromINPUT}
+              dateFromText={dateFromText}
+              dateTo={dateToINPUT}
+              dateToText={dateToText}
+              country={country}
+              price={price}
+              bedroom={bedroom}
+            />
+          </div>
+          {filteredList.length !== 0 ? (
+            filteredList.map((hotel, index) => {
+              return (
+                <HotelInfo
+                  key={index}
+                  slug={hotel.slug}
+                  name={hotel.name}
+                  photo={hotel.photo}
+                  description={hotel.description}
+                  rooms={hotel.rooms}
+                  city={hotel.city}
+                  country={hotel.country}
+                  price={hotel.price}
+                />
+              );
+            })
+          ) : (
+            <Error
+              className="error-container display-flex"
+              text="Upps, no se han encontrado resultados."
+            />
+          )}
+        </div>
       </div>
     </div>
   );
